@@ -38,6 +38,7 @@ detector = HandDetector( maxHands = 1)
 while True:
     status, photo = cap.read()
     hand = detector.findHands(photo, draw= False)
+    cv2.imshow("my photo", photo)
     if cv2.waitKey(100) == 13:
         break
     if hand :
