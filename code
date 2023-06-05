@@ -1,0 +1,64 @@
+import cv2
+
+cap=cv2.VideoCapture(0)
+
+allOs=[]
+
+allOs
+
+import boto3
+
+ec2= boto3.resource("ec2")
+
+def myOslaunch():
+    instances = ec2.create_instances(
+        ImageId="ami-0607784b46cbe5816",
+        MinCount=1,
+        MaxCount=1,
+        InstanceType="t2.micro",
+        SecurityGroupIds = [ "sg-0c859b5d5a14eaaf2" ]
+        )
+    myid = instances[0].id
+    allOs.append(myid)
+    print(myid)
+    print( "total os: ", len(allOs) )
+    
+
+def osTerminate():
+    if len(allOs) != 0:
+        osdelete = allOs.pop()
+        ec2.instances.filter(InstanceIds = [osdelete]).terminate()
+        print( "total os: ", len(allOs) )
+    
+
+
+
+from cvzone.HandTrackingModule import HandDetector
+detector = HandDetector( maxHands = 1)
+while True:
+    status, photo = cap.read()
+    hand = detector.findHands(photo, draw= False)
+    if cv2.waitKey(100) == 13:
+        break
+    if hand :
+        lmlist= hand[0]
+        totalFinger=detector.fingersUp(lmlist)
+        if totalFinger == [0,1,1,0,0,]:
+            print("launching a new instance")
+            myOslaunch()
+        elif totalFinger == [0,1,0,0,0,]:
+            print("Terminating the instance")
+            osTerminate()
+        else:
+            print("show correct fingers")
+cv2.destroyAllWindows()
+
+
+
+allOs
+
+cap.release()
+
+
+
+
