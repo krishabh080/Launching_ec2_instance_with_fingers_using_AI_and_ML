@@ -12,11 +12,11 @@ ec2= boto3.resource("ec2")
 
 def myOslaunch():
     instances = ec2.create_instances(
-        ImageId="ami-0607784b46cbe5816",
+        ImageId="AMI_ID_HERE",
         MinCount=1,
         MaxCount=1,
         InstanceType="t2.micro",
-        SecurityGroupIds = [ "sg-0c859b5d5a14eaaf2" ]
+        SecurityGroupIds = ["SECURITY_GROUP_ID_HERE"]
         )
     myid = instances[0].id
     allOs.append(myid)
