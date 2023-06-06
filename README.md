@@ -39,19 +39,40 @@ To set up the project, follow these steps:
 To utilize the code successfully, you need to create an IAM user on your AWS account.
 1. Go to IAM Dashboard , click on users:
 <img width="277" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/a4ff4e7a-be76-4baf-a506-1d6185906797">
+
+
 2. create on add users:
 <img width="172" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/25d5faff-45d0-4750-82aa-383ea47a6940">
+
+
 3. Add username.
+
+
 4. click on "Attach Policies Directly" , attach pemission:
+
 <img width="393" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/94c4dbef-2d23-416e-9077-f5684d65ded2">
+
+
 5. Click on create user.
+
+
 6.
 <img width="426" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/d14ec6e8-78e1-4d3e-bf6b-97f0eaec0360">
+
+
 <img width="646" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/f27f1bdc-d4c4-48fd-b9d1-b5241034cf70">
+
+
 <img width="452" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/c0eb1202-a0f7-4ea2-9df4-c00c6b27d2f4">
+
+
 Copy access and secret keys:
+
 <img width="392" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/c6589500-0e64-4052-9f10-95127bc1de0a">
+
+
 Add the user to your AWS CLI on windows.
+
 <img width="517" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/dce8a809-6e4c-42d5-9cb5-577483334570">
 
 
