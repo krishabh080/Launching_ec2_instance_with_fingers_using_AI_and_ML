@@ -56,7 +56,7 @@ To utilize the code successfully, you need to create an IAM user on your AWS acc
 5. Click on create user.
 
 
-6.
+6. Go to the Security Credentials section of IAM user and create access and secret key, then configure them on your CLI on windows.
 <img width="426" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/d14ec6e8-78e1-4d3e-bf6b-97f0eaec0360">
 
 
@@ -75,9 +75,65 @@ Add the user to your AWS CLI on windows.
 
 <img width="517" alt="image" src="https://github.com/krishabh080/Launching_ec2_instance_with_fingers_using_AI_and_ML/assets/86287145/dce8a809-6e4c-42d5-9cb5-577483334570">
 
+### Creating Security Group and Adding Inbound Rules
 
+To create a security group and add inbound rules, follow these steps:
+
+1. Go to the AWS Management Console and navigate to the EC2 service.
+
+2. Click on "Security Groups" in the sidebar menu.
+
+3. Click on the "Create security group" button.
+
+4. Provide a name for the security group and a description (optional).
+
+5. In the "Inbound rules" section, click on "Add rule" to define the inbound traffic rules based on your requirements. Specify the protocol (e.g., TCP, UDP), port range, and source IP or CIDR range. Add as many inbound rules as needed.
+
+6. Once you have defined all the inbound rules, click on the "Create security group" button to create the security group.
+
+7. After the security group is created, locate its ID in the "Security group ID" column. Copy this ID for use in the `myOslaunch()` function in the code.
+
+### Choosing an Amazon Machine Image (AMI)
+
+To choose an AMI to launch an EC2 instance, follow these steps:
+
+1. Go to the AWS Management Console and navigate to the EC2 service.
+
+2. Click on "Instances" in the sidebar menu.
+
+3. Click on the "Launch instance" button.
+
+4. In the "Step 1: Choose an Amazon Machine Image (AMI)" section, select the desired AMI based on your requirements. You can choose from various pre-configured AMIs provided by AWS or select a community AMI.
+
+5. Once you have selected the AMI, note down its AMI ID for use in the `myOslaunch()` function in the code.
 
 ## Usage
+
+Ensure that you have performed the configuration steps mentioned above before running the code.
+
+After configuring the security group and choosing the AMI, update the `myOslaunch()` function in the code with the appropriate values.
+
+```python
+def myOslaunch():
+    instances = ec2.create_instances(
+        ImageId="AMI_ID_HERE",  # Replace with the AMI ID you selected
+        MinCount=1,
+        MaxCount=1,
+        InstanceType="Instance type", #Replace with the instance type you want to launch
+        SecurityGroupIds=["SECURITY_GROUP_ID_HERE"]  # Replace with the security group ID you created
+    )
+    myid = instances[0].id
+    allOs.append(myid)
+    print(myid)
+    print("total os:", len(allOs))
+```
+
+Replace `"AMI_ID_HERE"` with the AMI ID you selected from the AWS console. Replace `"SECURITY_GROUP_ID_HERE"` with the security group ID you created.
+
+Now you can run the code to control EC2 instances using finger gestures.
+
+**Note:** It is important to ensure that the security group allows the necessary inbound traffic for your application and that the chosen AMI is compatible with your requirements.
+
 
 After completing the installation and configuration steps, you can run the main code script to control EC2 instances using finger gestures.
 
@@ -94,11 +150,11 @@ ec2 = boto3.resource("ec2")
 
 def myOslaunch():
     instances = ec2.create_instances(
-        ImageId="ami-0607784b46cbe5816",
+        ImageId="AMI_ID_HERE",
         MinCount=1,
         MaxCount=1,
         InstanceType="t2.micro",
-        SecurityGroupIds=["sg-0c859b5d5a14eaaf2"]
+        SecurityGroupIds=["SECURITY_GROUP_ID_HERE"]
     )
     myid = instances[0].id
     allOs.append(myid)
@@ -162,9 +218,9 @@ cap.release()
 
 9. If a hand is detected, the `fingersUp()` function from the `HandDetector` class is called to determine the finger gestures made by the hand.
 
-10. If the finger gesture corresponds to [0, 1, 1, 0, 0], the code executes the `myOslaunch()` function to launch a new EC2 instance.
+10. If the finger gesture corresponds to [0, 1, 1, 0, 0], means "index and middle figers are up" then code executes the `myOslaunch()` function to launch a new EC2 instance.
 
-11. If the finger gesture corresponds to [0, 1, 0, 0, 0], the code executes the `osTerminate()` function to terminate the most recently launched EC2 instance.
+11. If the finger gesture corresponds to [0, 1, 0, 0, 0], means "only index finger is up" then code executes the `osTerminate()` function to terminate the most recently launched EC2 instance.
 
 12. If the finger gesture does not match any predefined gestures, a message is printed to "show correct fingers".
 
